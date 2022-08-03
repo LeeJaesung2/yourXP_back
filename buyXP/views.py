@@ -9,3 +9,4 @@ def index(request):
 def detail(request):
     buy_detail = Buy.objects.all(Buy, pk=buy_id)
     return render(request, 'buydetail.html', {'buy_detail':buy_detail})
+    #ffasada
