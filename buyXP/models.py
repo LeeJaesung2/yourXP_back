@@ -1,6 +1,3 @@
-from ctypes import pointer
-from email.quoprimime import body_check
-from django.conf import DEFAULT_HASHING_ALGORITHM_DEPRECATED_MSG
 from django.db import models
 
 # Create your models here.

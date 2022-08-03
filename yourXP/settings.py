@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
-    'sellXP.apps.SellXPConfig',
-    'buyXP.apps.BuyXPConfig',
+    'sellXP.apps.SellxpConfig',
+    'buyXP.apps.BuyxpConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
