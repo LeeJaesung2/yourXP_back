@@ -4,7 +4,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 class Post(models.Model):
     id = models.BigAutoField(help_text="Post ID", primary_key=True)
-    title = models.CharField(help_text="Post title", max_length=100)
+    title = models.CharField(help_text="Post title", max_length=100, null = True)
     contents = models.TextField(help_text="post contents")
     author = models.CharField(max_length=100)
     pub_date = models.DateTimeField(auto_now_add=True)
