@@ -7,6 +7,6 @@ def index(request):
     return render(request, 'buylist.html', {'buys':buys})
 
 def detail(request):
-    buy_detail = Buy.objects.all(Buy, pk=buy_id)
+    buy_detail = Buy.objects.all(Buy)
     return render(request, 'buydetail.html', {'buy_detail':buy_detail})
-    #ffasada
+    
