@@ -8,3 +8,4 @@ URLPatterns = [
     path('create', views.create, name="create"),
   #  path('update/<int: buy_id>', views.update, name = "update"),
 ]
+
