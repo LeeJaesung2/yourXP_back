@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'sellXP.apps.SellXPConfig',
     'buyXP.apps.BuyXPConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
