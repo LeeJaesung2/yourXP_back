@@ -3,17 +3,19 @@ from django.db import models
 
 # Create your models here.
 class Writer(models.Model):
-    id = models.BigAutoField(primary_key=True)
+    b_id = models.BigAutoField(primary_key=True)
     title = models.CharField(max_length=100)
-    body = models.TextField
-    due_date = models.TimeField
-    point = models.IntegerField
-    pub_date = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
+    create_time = models.DateTimeField(auto_now_add=True)
+    deadline = models.TimeField()
+    price = models.IntegerField()
+    hits = models.IntegerField()
 
 
 
 class Buy(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    buy_id = models.ForeignKey("Writer", related_name="writers", on_delete=models.CASCADE)
+    b_id = models.BigAutoField(primary_key=True)
+    tag_id = models.ForeignKey("Writer", related_name="writers", on_delete=models.CASCADE)
     author = models.CharField(max_length=100)
-    pub_date = models.DateTimeField(auto_now_add=True)
+    create_time = models.DateTimeField(auto_now_add=True)
+
