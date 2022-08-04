@@ -13,6 +13,7 @@ class BuyXP(models.Model):
     deadline = models.TimeField()
     price = models.IntegerField()
     tag_id = models.ForeignKey("buyXP_tag", related_name="tag", on_delete=models.CASCADE)
+    hits = models.IntegerField()
 
 class BuyXP_tag(models.Model):
     tag_id = models.IntegerField()

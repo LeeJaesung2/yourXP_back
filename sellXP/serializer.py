@@ -1,15 +1,15 @@
 from dataclasses import field
 from rest_framework import serializers
-from .models import Post
-from .models import Review
+from .models import SellXP
+from .models import Sell_review
 
-class PostSerializer(serializers.ModelSerializer):
+class SellXPSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Post
-        fields = ('id','title', 'contents', 'author', 'pub_date')
+        model = SellXP
+        fields = '__all__'
 
-class ReviewSerializer(serializers.ModelSerializer):
+class Sell_reviewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Review
-        fields = ('id','post_id', 'comment', 'author', 'star', 'pub_date')
-        read_only_fields = ('post', )
+        model = Sell_review
+        fields = '__all__'
+        read_only_fields= ('sellXP_id', )
