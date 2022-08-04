@@ -1,18 +1,18 @@
 from django.shortcuts import render
 from rest_framework import status
-from rest_framework.decorators import sellXP_view
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializer import PostsSerializer
-from .models import Posts
+from .models import Posts, TestModel
 # Create your views here.
 
-@sellXP_view(['GET'])
+@api_view(['GET'])
 def getPosts(request):
     posts = Posts.objects.all()
-    serializer = PostsSerializer([posts, many = True])
+    serializer = PostsSerializer(posts, many = True)
     return Response(serializer.data)
 
-@sellXP_view(['POST'])
+@api_view(['POST'])
 def createPosts(request):
     serializer = PostsSerializer(data=request.data)
     if serializer.is_valid():
@@ -20,7 +20,7 @@ def createPosts(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@sellXP_view(['PATCH'])
+@api_view(['PATCH'])
 def updatePosts(request, post_id):
     print(request.data)
     posts = Posts.objects.get(pk = post_id)
@@ -31,7 +31,7 @@ def updatePosts(request, post_id):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@sellXP_view(['DELETE'])
+@api_view(['DELETE'])
 def deletePost(request, post_id):
     post = Posts.objects.get(pk = post_id)
     post.delete()
