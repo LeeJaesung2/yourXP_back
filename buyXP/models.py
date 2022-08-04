@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 
-class buyXP(models.Model):
+class BuyXP(models.Model):
     id = models.BigAutoField(primary_key=True)
     title = models.CharField(max_length=100)
     text = models.TextField()
@@ -14,7 +14,7 @@ class buyXP(models.Model):
     price = models.IntegerField()
     tag_id = models.ForeignKey("buyXP_tag", related_name="tag", on_delete=models.CASCADE)
 
-class buyXP_tag(models.Model):
+class BuyXP_tag(models.Model):
     tag_id = models.IntegerField()
     tag1 = models.CharField(max_length=100)
     tag2 = models.CharField(max_length=100)
