@@ -8,7 +8,7 @@ class BuyXP(models.Model):
     title = models.CharField(max_length=100)
     text = models.TextField()
     create_time = models.DateTimeField(auto_now_add=True)
-#    user_id = models.ForeignKey("user_id", related_name="user")
+#   user_id = models.ForeignKey("user_id", related_name="user") 
     hits = models.IntegerField()
     deadline = models.TimeField()
     price = models.IntegerField()
