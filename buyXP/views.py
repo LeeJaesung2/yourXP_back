@@ -1,12 +1,15 @@
-from django.shortcuts import render
+from urllib import response
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from .models import Buy
+from .serializer import BuySerializer
+from sellXP import serializer
+
 
 # Create your views here.
-def index(request):
+@api_view(['GET'])
+def getBuyById(request):
     buys = Buy.objects.all()
-    return render(request, 'buylist.html', {'buys':buys})
-
-def detail(request):
-    buy_detail = Buy.objects.all(Buy)
-    return render(request, 'buydetail.html', {'buy_detail':buy_detail})
-    
+    serializer = BuySerializer(buys, many=True)
+    return response(serializer.data)

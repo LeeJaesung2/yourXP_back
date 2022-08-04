@@ -1,11 +1,13 @@
 from django.contrib import admin
-from django.urls import URLPattern, path
+from django.urls import path
 from yourXP import views
 
 URLPatterns = [
-    path('/admin', admin.site.urls),
-    path('detail/<int:buy_id', views.detail, name = "detail"),
-    path('create', views.create, name="create"),
-    path('update/<int: buy_id>', views.update, name = "update"),
+    path('admin', admin.site.urls),
+    path('buys', views.getBuyById, name="getBuys"),
+    path('buy', views.createBuy, name="createBuy"),
+    path('buy/<buy_id>', views.getBuyById, name="getReviewById"),
+    path('buy/<buy_id>', views.updateBuy, name="updateReview"),
+    path('buy/<buy_id>', views.deleteBuy, name="deleteReview"),
 ]
 
