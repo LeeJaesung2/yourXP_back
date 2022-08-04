@@ -1,3 +1,4 @@
+from functools import partial
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -19,7 +20,19 @@ def createBuyXP(request):
     serializer = BuyXPSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        return response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response(serializer.data, status = status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
+@api_view(['PATCH'])
+def updateBuyXP(request):
+    print(request.data)
+    buys = BuyXP.objects.get(pk=id)
+    serializer = BuyXPSerializer(buys, data=request.data, partial=True)
+    
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status = status.HTTP_201_CREATED)
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
