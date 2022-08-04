@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import buyXP, buyXP_tag
+from .models import BuyXP, BuyXP_tag
 # Register your models here.
 
-admin.site.register(buyXP_tag)
-admin.site.register(buyXP)
+admin.site.register(BuyXP_tag)
+admin.site.register(BuyXP)
