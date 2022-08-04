@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'sellXP.apps.SellxpConfig',
     'buyXP.apps.BuyxpConfig',
+    'chat.apps.ChatConfig',
     'rest_framework',
 ]
 
