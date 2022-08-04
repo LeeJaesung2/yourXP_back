@@ -1,15 +1,22 @@
+from sqlite3 import DateFromTicks
 from django.db import models
 
 # Create your models here.
-class Buy(models.Model):
-    title = models.CharField(max_length=50)
-    pub_date = models.DateTimeField
-    hash_tag = models.CharField(max_length=10)
-    body = models.TextField
-    point = models.IntegerField
-    due_date = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField
+class Writer(models.Model):
+    b_id = models.BigAutoField(primary_key=True)
+    title = models.CharField(max_length=100)
+    text = models.TextField()
+    create_time = models.DateTimeField(auto_now_add=True)
+    deadline = models.TimeField()
+    price = models.IntegerField()
+    hits = models.IntegerField()
 
-    def __str__(self):
-        return self.title
-        # fdsaf
+
+
+class Buy(models.Model):
+
+    b_id = models.BigAutoField(primary_key=True)
+    tag_id = models.ForeignKey("Writer", related_name="writers", on_delete=models.CASCADE)
+    author = models.CharField(max_length=100)
+    create_time = models.DateTimeField(auto_now_add=True)
+
