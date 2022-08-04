@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'user.User'
 
 # Application definition
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'sellXP.apps.SellxpConfig',
     'buyXP.apps.BuyxpConfig',
+    'user.apps.UserConfig',
     'chat.apps.ChatConfig',
     'rest_framework',
 ]
