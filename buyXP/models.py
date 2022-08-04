@@ -14,6 +14,7 @@ class Writer(models.Model):
 
 
 class Buy(models.Model):
+
     b_id = models.BigAutoField(primary_key=True)
     tag_id = models.ForeignKey("Writer", related_name="writers", on_delete=models.CASCADE)
     author = models.CharField(max_length=100)
