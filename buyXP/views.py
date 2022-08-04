@@ -27,7 +27,7 @@ def createBuyXP(request):
 @api_view(['PATCH'])
 def updateBuyXP(request):
     print(request.data)
-    buys = BuyXP.objects.get(pk=id)
+    buys = BuyXP.objects.get(pk=id) 
     serializer = BuyXPSerializer(buys, data=request.data, partial=True)
     
     if serializer.is_valid():
@@ -36,3 +36,8 @@ def updateBuyXP(request):
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+@api_view(['DELETE'])
+def deleteBuyXP(request):
+    buys = BuyXP.objects.get(pk=id)
+    buys.delete()
+    return Response({'message':'success', 'code':'200'})
