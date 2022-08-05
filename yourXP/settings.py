@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'user.User'
 
 # Application definition
 
@@ -40,7 +41,8 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'sellXP.apps.SellxpConfig',
     'buyXP.apps.BuyxpConfig',
-    'rest_framework'
+    'user.apps.UserConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
