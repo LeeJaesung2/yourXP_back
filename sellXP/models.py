@@ -3,7 +3,16 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from user.models import User
 
 class SellXP_tag(models.Model):
-    pass
+    tag1 = models.CharField(max_length=100, null=True)
+    tag2 = models.CharField(max_length=100, null=True)
+    tag3 = models.CharField(max_length=100, null=True)
+    tag4 = models.CharField(max_length=100, null=True)
+    tag5 = models.CharField(max_length=100, null=True)
+    tag6 = models.CharField(max_length=100, null=True)
+    tag7 = models.CharField(max_length=100, null=True)
+    tag8 = models.CharField(max_length=100, null=True)
+    tag9 = models.CharField(max_length=100, null=True)
+    tag10 = models.CharField(max_length=100, null=True)
 
 # Create your models here.
 class SellXP(models.Model):

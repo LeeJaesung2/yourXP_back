@@ -12,13 +12,13 @@ from sellXP import serializer
 
 # SellXP CRUD
 @api_view(['GET'])
-def getPosts(request):
-    posts = SellXP.objects.all()
-    serializer = SellXPSerializer(posts, many = True)
+def getSellXP(request):
+    sellxp = SellXP.objects.all()
+    serializer = SellXPSerializer(sellxp, many = True)
     return Response(serializer.data)
 
 @api_view(['POST'])
-def createPosts(request):
+def createSellXP(request):
     serializer = SellXPSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -26,10 +26,9 @@ def createPosts(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['PATCH'])
-def updatePosts(request, post_id):
-    print(request.data)
-    posts = SellXP.objects.get(pk = post_id)
-    serializer = SellXPSerializer(posts, data=request.data, partial = True)
+def updateSellXP(request, sellxp_id):
+    sellxp = SellXP.objects.get(pk = sellxp_id)
+    serializer = SellXPSerializer(sellxp, data=request.data, partial = True)
 
     if serializer.is_valid():
         serializer.save()
@@ -37,9 +36,9 @@ def updatePosts(request, post_id):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
-def deletePost(request, post_id):
-    post = SellXP.objects.get(pk = post_id)
-    post.delete()
+def deleteSellXP(request, sellxp_id):
+    sellxp = SellXP.objects.get(pk = sellxp_id)
+    sellxp.delete()
     return Response({'message':'sucess', 'code' : 200})
 
 # Create your views here.
