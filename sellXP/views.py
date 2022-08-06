@@ -10,6 +10,7 @@ from .models import SellXP
 from .models import Sell_review
 from sellXP import serializer
 from django.contrib.auth.decorators import login_required
+from .models import User
 # Create your views here.
 
 # SellXP CRUD 
@@ -47,7 +48,7 @@ def deleteSellXP(request, sellxp_id):
 @login_required(login_url = '')
 def sellXP_like(request, sellxp_id):
     sellxp = SellXP.objects.get(id = sellxp_id)
-    user = request.user
+    user = request.User
     if sellxp.sellXP_like.filter(id=request.user.id).exists():
         sellxp.sellXP_like.remove(user)
         return JsonResponse({'message ': 'delete', 'sellXP_like_cnt':sellxp.sellxp_like.count()})
