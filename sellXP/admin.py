@@ -6,4 +6,3 @@ from .models import Sell_review
 admin.site.register(SellXP)
 admin.site.register(SellXP_tag)
 admin.site.register(Sell_review)
-
