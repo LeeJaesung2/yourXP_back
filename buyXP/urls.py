@@ -10,4 +10,3 @@ urlpatterns = [
     path('buys/update/<id>', views.updateBuyXP, name="updateBuyXP"),
 ]
 
-
