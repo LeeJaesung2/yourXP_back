@@ -8,3 +8,4 @@ urlpatterns = [
     path('buy', views.createBuyXP, name="createBuyXP"),
     path('buys/update/<id>', views.updateBuyXP, name="updateBuyXP"),
 ]
+
