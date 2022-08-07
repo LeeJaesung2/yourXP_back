@@ -27,6 +27,12 @@ class SellXP(models.Model):
     # 좋아요 기능 N:N 관계정의
     like = models.ManyToManyField(User, related_name="likes", blank=True)
 
+#   조회수 기능 (프론트에서 함수호출 필요)
+    @property
+    def update_hit(self):
+        self.hits = self.hits + 1
+        self.save()
+
 class Sell_review(models.Model):
     sellXP_id = models.ForeignKey("SellXP", related_name="sellXP", on_delete=models.CASCADE, db_column="sellXP_id")
     body = models.TextField()
