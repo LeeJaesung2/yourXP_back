@@ -8,6 +8,38 @@ from .serializer import Sell_reviewSerializer
 from .models import SellXP
 from .models import Sell_review
 from sellXP import serializer
+# Create your views here.
+
+# SellXP CRUD
+@api_view(['GET'])
+def getSellXP(request):
+    sellxp = SellXP.objects.all()
+    serializer = SellXPSerializer(sellxp, many = True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def createSellXP(request):
+    serializer = SellXPSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PATCH'])
+def updateSellXP(request, sellxp_id):
+    sellxp = SellXP.objects.get(pk = sellxp_id)
+    serializer = SellXPSerializer(sellxp, data=request.data, partial = True)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def deleteSellXP(request, sellxp_id):
+    sellxp = SellXP.objects.get(pk = sellxp_id)
+    sellxp.delete()
+    return Response({'message':'sucess', 'code' : 200})
 
 # Create your views here.
 @api_view(['GET'])
