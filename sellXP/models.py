@@ -33,9 +33,9 @@ class SellXP(models.Model):
         self.hits = self.hits + 1
         self.save()
 
-class Sell_review(models.Model):
+class Sell_review(models.Model): #리뷰 모델
     sellXP_id = models.ForeignKey("SellXP", related_name="sellXP", on_delete=models.CASCADE, db_column="sellXP_id")
     body = models.TextField()
-    user_id = models.CharField(max_length=100)
+    user = models.ForeignKey("user.User", related_name="user", on_delete=models.CASCADE, db_column="user")
     grad = models.IntegerField(null=False, validators=[MaxValueValidator(10),MinValueValidator(1)])
 

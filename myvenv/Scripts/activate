@@ -38,7 +38,6 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-
 VIRTUAL_ENV="C:\Users\김민지\Desktop\yourXP_back\myvenv"
 export VIRTUAL_ENV
 
