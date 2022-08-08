@@ -1,4 +1,3 @@
-
 from rest_framework import serializers
 from .models import SellXP, SellXP_tag
 from .models import Sell_review
