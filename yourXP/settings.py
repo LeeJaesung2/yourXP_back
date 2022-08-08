@@ -38,7 +38,7 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = get_secret("SECRET_KEY")
 DEBUG = False
 
-ALLOWED_HOSTS = ['cloudtype.app']
+ALLOWED_HOSTS = ['127.0.0.1', '.cloudtype.app']
 
 AUTH_USER_MODEL = 'user.User'
 
