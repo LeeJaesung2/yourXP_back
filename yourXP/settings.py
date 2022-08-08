@@ -39,7 +39,7 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = get_secret("SECRET_KEY")
 DEBUG = True
 
-ALLOWED_HOSTS = ['port-0-yourxp-back-5faq24l6koz2gl.gksl1.cloudtype.app']
+ALLOWED_HOSTS = ['127.0.0.1','port-0-yourxp-back-5faq24l6koz2gl.gksl1.cloudtype.app']
 
 AUTH_USER_MODEL = 'user.User'
 
@@ -67,7 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
 ]
 
 ROOT_URLCONF = 'yourXP.urls'
