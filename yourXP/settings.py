@@ -39,7 +39,7 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = get_secret("SECRET_KEY")
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','gksl1.cloudtype.app']
+ALLOWED_HOSTS = ['port-0-yourxp-back-5faq24l6koz2gl.gksl1.cloudtype.app']
 
 AUTH_USER_MODEL = 'user.User'
 
