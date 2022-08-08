@@ -1,5 +1,6 @@
 from sqlite3 import DateFromTicks
 from django.db import models
+from user.models import User
 
 # Create your models here.
 
@@ -7,7 +8,7 @@ class BuyXP(models.Model):
     title = models.CharField(max_length=100)
     text = models.TextField()
     create_time = models.DateTimeField(auto_now_add=True)
-    user_id = models.ForeignKey("user_id", related_name="user") 
+    user = models.ForeignKey(User, related_name='+', on_delete=models.CASCADE, default="", blank=True, null=True)
     deadline = models.DateTimeField()
     price = models.IntegerField()
     BuyXP_tag = models.ForeignKey("BuyXP_tag", related_name="+", on_delete=models.CASCADE, default="", blank=True, null=True)
