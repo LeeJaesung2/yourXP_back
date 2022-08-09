@@ -6,7 +6,7 @@ from dataclasses import field
 class SellXPSerializer(serializers.ModelSerializer):
     class Meta:
         model = SellXP
-        fields = ('id', 'title', 'text', 'hits', 'recommend', 'price')
+        fields = ('title', 'text', 'hits', 'recommend', 'price')
 
 class Sell_reviewSerializer(serializers.ModelSerializer):
     class Meta:
