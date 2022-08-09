@@ -16,9 +16,15 @@ from datetime import date, datetime, timedelta
 
 # SellXP CRUD 
 @api_view(['GET'])
-def getSellXP(request):
+def getSellXPs(request):
     sellxp = SellXP.objects.all()
     serializer = SellXPSerializer(sellxp, many = True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getSellXP(request, sellXP_id):
+    sellxp = SellXP.objects.get(pk = sellXP_id)
+    serializer = SellXPSerializer(sellxp)
     return Response(serializer.data)
 
 @api_view(['POST'])
