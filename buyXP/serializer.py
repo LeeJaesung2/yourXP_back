@@ -4,7 +4,7 @@ from .models import BuyXP, BuyXP_tag
 class BuyXPSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuyXP
-        fields = ('title', 'hits', 'create_time', 'user_id', 'text', 'price', 'BuyXP_tag') 
+        fields = ('id', 'title', 'text', 'create_time', 'hits', 'price', 'BuyXP_tag', 'user') 
 
 class BuyXP_tagSerializer(serializers.ModelSerializer):
     class Meta:

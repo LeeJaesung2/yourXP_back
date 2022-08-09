@@ -11,13 +11,20 @@ from .models import Sell_review
 from sellXP import serializer
 from django.contrib.auth.decorators import login_required
 from .models import User
+from datetime import date, datetime, timedelta
 # Create your views here.
 
 # SellXP CRUD 
 @api_view(['GET'])
-def getSellXP(request):
+def getSellXPs(request):
     sellxp = SellXP.objects.all()
     serializer = SellXPSerializer(sellxp, many = True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getSellXP(request, sellXP_id):
+    sellxp = SellXP.objects.get(pk = sellXP_id)
+    serializer = SellXPSerializer(sellxp)
     return Response(serializer.data)
 
 @api_view(['POST'])
@@ -56,15 +63,14 @@ def sellXP_like(request, sellxp_id):
         sellxp.sellXP_like.add(user)
         return JsonResponse({'message ': 'ok', 'sellXP_like_cnt':sellxp.sellxp_like.count()})
 
-# Create your views here.
 @api_view(['GET'])
-def getReviews(request, sellXP_id):
+def getReviews(request, sellXP_id): #해당 글의 리뷰 전체 보기
     sell_reviews = Sell_review.objects.filter(sellXP_id = sellXP_id)
     serializer = Sell_reviewSerializer(sell_reviews, many = True)
     return Response(serializer.data)
 
 @api_view(['GET', 'PATCH', 'DELETE'])
-def  reviewDetail(request, sellXP_id, sell_review_id):
+def  reviewDetail(request, sellXP_id, sell_review_id): #한 리뷰 보기, 수정, 삭제
     sell_review = Sell_review.objects.get(pk = sell_review_id)
     if request.method == 'GET':
         serializer = Sell_reviewSerializer(sell_review)
@@ -74,14 +80,14 @@ def  reviewDetail(request, sellXP_id, sell_review_id):
         serializer = Sell_reviewSerializer(sell_review, data=request.data, partial = True)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
         sell_review.delete()
         return Response({'message':'sucess', 'code' : 200})
 
 @api_view(['POST'])
-def createReview(request, sellXP_id):
+def createReview(request, sellXP_id): #리뷰 작성
     sellXP = SellXP.objects.get(pk = sellXP_id)
     serializer = Sell_reviewSerializer(data=request.data)
     if serializer.is_valid():
