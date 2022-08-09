@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.getSellXP, name="getSellXP"),
+    path('', views.getSellXPs, name="getSellXPs"),
+    path('<sellXP_id>', views.getSellXP, name="getSellXP"),
     path('create', views.createSellXP, name="createSellXP"),
     path('update/<sellxp_id>', views.updateSellXP, name="updateSellXP"),
     path('delete/<int:sellxp_id>', views.deleteSellXP, name="deleteSellXP"),

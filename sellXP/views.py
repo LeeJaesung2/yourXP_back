@@ -12,9 +12,15 @@ from sellXP import serializer
 
 # SellXP CRUD
 @api_view(['GET'])
-def getSellXP(request):
+def getSellXPs(request):
     sellxp = SellXP.objects.all()
     serializer = SellXPSerializer(sellxp, many = True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getSellXP(request, sellXP_id):
+    sellxp = SellXP.objects.get(pk = sellXP_id)
+    serializer = SellXPSerializer(sellxp)
     return Response(serializer.data)
 
 @api_view(['POST'])
@@ -58,7 +64,7 @@ def  reviewDetail(request, sellXP_id, sell_review_id): #한 리뷰 보기, 수�
         serializer = Sell_reviewSerializer(sell_review, data=request.data, partial = True)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
         sell_review.delete()
