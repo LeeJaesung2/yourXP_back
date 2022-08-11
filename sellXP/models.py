@@ -14,7 +14,6 @@ class SellXP_tag(models.Model):
     tag9 = models.CharField(max_length=100, null=True)
     tag10 = models.CharField(max_length=100, null=True)
 
-# Create your models here.
 class SellXP(models.Model):
     #s_id = models.BigAutoField(primary_key=True)
     title = models.CharField(max_length=200)
@@ -26,6 +25,12 @@ class SellXP(models.Model):
     price = models.IntegerField()
     sellXP_tag = models.ForeignKey(SellXP_tag, related_name='+', on_delete=models.CASCADE, default="", blank=True, null=True)
 
+def image_upload_path(instance, filename):
+    return f'{instance.sellXP_id.id}/{filename}'
+
+class Sell_image(models.Model):
+    sellXP_id = models.ForeignKey("SellXP", related_name="image", on_delete=models.CASCADE, db_column="image_sellXP_id")
+    image = models.ImageField(upload_to = image_upload_path)
 
 class Sell_review(models.Model): #리뷰 모델
     sellXP_id = models.ForeignKey("SellXP", related_name="sellXP", on_delete=models.CASCADE, db_column="sellXP_id")
