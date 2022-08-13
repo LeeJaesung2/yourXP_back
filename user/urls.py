@@ -7,6 +7,5 @@ urlpatterns = [
     path('login', views.login_view, name='login'),    
     path('logout', views.logout_view, name='logout'),
     path('<user_id>', views.userDetail, name="readUpdateDelete"),
-    path('<user_id>/pointplus', views.pointPlusDetail, name="pointPlusDetail"),
-    path('<user_id>/pointminus', views.pointMinusDetail, name="pointMinusDetail"),
+    path('<user_id>/point', views.pointDetail, name="pointDetail"),
 ]

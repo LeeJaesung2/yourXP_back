@@ -44,4 +44,3 @@ class Sell_review(models.Model): #리뷰 모델
     body = models.TextField()
     user = models.ForeignKey("user.User", related_name="user", on_delete=models.CASCADE, db_column="user")
     grad = models.IntegerField(null=False, validators=[MaxValueValidator(10),MinValueValidator(1)])
-
