@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializer import UserSerializer, PointPlusSerializer, PointMinusSerializer
+from .serializer import UserSerializer, PointSerializer
 from .models import User
 from django.contrib.auth import authenticate, login, logout
 
@@ -54,18 +54,9 @@ def logout_view(request): #로그아웃
     return redirect('getUsers')
 
 @api_view(['PATCH'])
-def pointPlusDetail(request, user_id):
+def pointDetail(request, user_id):
     user = User.objects.get(pk = user_id)
-    serializer = PointPlusSerializer(user, data=request.data, partial = True)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['PATCH'])
-def pointMinusDetail(request, user_id):
-    user = User.objects.get(pk = user_id)
-    serializer = PointMinusSerializer(user, data=request.data, partial = True)
+    serializer = PointSerializer(user, data=request.data, partial = True)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
