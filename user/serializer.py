@@ -19,7 +19,27 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.real_name = validated_data.get('real_name', user.real_name)
         user.profile = validated_data.get('profile', user.profile)
-        user.nickname= validated_data.get('nickname', user.nickname)
-        user.email= validated_data.get('email', user.email)
+        user.nickname = validated_data.get('nickname', user.nickname)
+        user.email = validated_data.get('email', user.email)
+        user.save()
+        return user
+
+class PointPlusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'point')
+
+    def update(self, user, validated_data):
+        user.point += validated_data.get('point', user.point)
+        user.save()
+        return user
+
+class PointMinusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'point')
+
+    def update(self, user, validated_data):
+        user.point -= validated_data.get('point', user.point)
         user.save()
         return user

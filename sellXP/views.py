@@ -9,25 +9,38 @@ from .serializer import Sell_reviewSerializer
 from .models import SellXP
 from .models import Sell_review
 from sellXP import serializer
+from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth.decorators import login_required
 from .models import User
 from datetime import date, datetime, timedelta
+
 # Create your views here.
 
 # SellXP CRUD 
 @api_view(['GET'])
-def getSellXP(request):
+def getSellXPs(request):
     sellxp = SellXP.objects.all()
     serializer = SellXPSerializer(sellxp, many = True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def getSellXP(request, sellXP_id):
+    sellxp = SellXP.objects.get(pk = sellXP_id)
+    serializer = SellXPSerializer(sellxp, context={"request": request})
+    return Response(serializer.data)
+
 @api_view(['POST'])
 def createSellXP(request):
-    serializer = SellXPSerializer(data=request.data)
+    serializer = SellXPSerializer(data=request.data, context={'request': request})
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+class sellXPViewSet(ModelViewSet):
+    queryset = SellXP.objects.all().order_by('-create_time')
+    serializer_class = SellXPSerializer
 
 @api_view(['PATCH'])
 def updateSellXP(request, sellxp_id):
@@ -88,3 +101,7 @@ def createReview(request, sellXP_id): #리뷰 작성
         serializer.save(sellXP_id=sellXP)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class sellXPViewSet(ModelViewSet):
+    queryset = SellXP.objects.all().order_by('-create_time')
+    serializer_class = SellXPSerializer
