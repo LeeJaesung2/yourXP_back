@@ -16,7 +16,7 @@ class SellXPSerializer(serializers.ModelSerializer):
         instance  = SellXP.objects.create(**validated_data)
         image_set = self.context['request'].FILES
         for image_data in image_set.getlist('image'):
-            Sell_image.objects.create(sellXP_id=instance , image=image_data)
+            Sell_image.objects.create(sellXP_id=instance, image=image_data)
         return instance 
 
 class Sell_imageSerializer(serializers.ModelSerializer):
