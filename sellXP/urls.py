@@ -19,4 +19,5 @@ urlpatterns = [
     path('<sellXP_id>/reviews', views.getReviews, name="getReviews"),
     path('<sellXP_id>/review', views.createReview, name="createReview"),
     path('<sellXP_id>/review/<sell_review_id>', views.reviewDetail, name="readUpdateDelete"),
-]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('like/<int:sellxp_id', views.sellXP_like, name="sellXP_like"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

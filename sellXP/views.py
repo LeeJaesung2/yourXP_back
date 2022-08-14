@@ -1,4 +1,5 @@
 from functools import partial
+from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -9,9 +10,13 @@ from .models import SellXP
 from .models import Sell_review
 from sellXP import serializer
 from rest_framework.viewsets import ModelViewSet
+from django.contrib.auth.decorators import login_required
+from .models import User
+from datetime import date, datetime, timedelta
+
 # Create your views here.
 
-# SellXP CRUD
+# SellXP CRUD 
 @api_view(['GET'])
 def getSellXPs(request):
     sellxp = SellXP.objects.all()
@@ -51,6 +56,18 @@ def deleteSellXP(request, sellxp_id):
     sellxp = SellXP.objects.get(pk = sellxp_id)
     sellxp.delete()
     return Response({'message':'sucess', 'code' : 200})
+
+# 좋아요 기능 구현 (비동기 통신), js코드로 ajax방식으로 표현 필요
+@login_required(login_url = '')
+def sellXP_like(request, sellxp_id):
+    sellxp = SellXP.objects.get(id = sellxp_id)
+    user = request.User
+    if sellxp.sellXP_like.filter(id=request.user.id).exists():
+        sellxp.sellXP_like.remove(user)
+        return JsonResponse({'message ': 'delete', 'sellXP_like_cnt':sellxp.sellxp_like.count()})
+    else:
+        sellxp.sellXP_like.add(user)
+        return JsonResponse({'message ': 'ok', 'sellXP_like_cnt':sellxp.sellxp_like.count()})
 
 @api_view(['GET'])
 def getReviews(request, sellXP_id): #해당 글의 리뷰 전체 보기
