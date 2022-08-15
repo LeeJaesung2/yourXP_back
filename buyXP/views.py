@@ -9,8 +9,7 @@ from .serializer import BuyXP_tagSerializer, BuyXPSerializer
 from buyXP import serializer
 from user.models import User
 from operator import itemgetter, attrgetter
-from rest_framework import filters, generics
-from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics
 from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.filters import SearchFilter
