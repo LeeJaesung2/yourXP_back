@@ -1,4 +1,3 @@
-from re import T
 from sqlite3 import DateFromTicks
 from django.db import models
 from user.models import User
