@@ -42,6 +42,9 @@ ALLOWED_HOSTS = ['127.0.0.1','port-0-yourxp-back-5faq24l6koz2gl.gksl1.cloudtype.
 
 AUTH_USER_MODEL = 'user.User'
 
+CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:8000','https://port-0-yourxp-back-5faq24l6koz2gl.gksl1.cloudtype.app/']
+CORS_ALLOW_CREDENTIALS = True
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -56,6 +59,7 @@ INSTALLED_APPS = [
     'buyXP.apps.BuyxpConfig',
     'user.apps.UserConfig',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', 
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'yourXP.urls'
