@@ -94,3 +94,11 @@ def createReview(request, sellXP_id): #리뷰 작성
         serializer.save(sellXP_id=sellXP)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def searchSellXP(request, searchName):
+    name = searchName
+    sells = SellXP.objects.all()
+    searchSells = sells.filter(title__icontains=name)
+    searchSellsSerializer = SellXPSerializer(searchSells, many=True)
+    return Response(searchSellsSerializer.data)
