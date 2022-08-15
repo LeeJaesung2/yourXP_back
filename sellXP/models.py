@@ -3,16 +3,16 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from user.models import User
 
 class SellXP_tag(models.Model):
-    tag1 = models.CharField(max_length=100, null=True)
-    tag2 = models.CharField(max_length=100, null=True)
-    tag3 = models.CharField(max_length=100, null=True)
-    tag4 = models.CharField(max_length=100, null=True)
-    tag5 = models.CharField(max_length=100, null=True)
-    tag6 = models.CharField(max_length=100, null=True)
-    tag7 = models.CharField(max_length=100, null=True)
-    tag8 = models.CharField(max_length=100, null=True)
-    tag9 = models.CharField(max_length=100, null=True)
-    tag10 = models.CharField(max_length=100, null=True)
+    tag1 = models.CharField(max_length=100, null=True, blank=True)
+    tag2 = models.CharField(max_length=100, null=True, blank=True)
+    tag3 = models.CharField(max_length=100, null=True, blank=True)
+    tag4 = models.CharField(max_length=100, null=True, blank=True)
+    tag5 = models.CharField(max_length=100, null=True, blank=True)
+    tag6 = models.CharField(max_length=100, null=True, blank=True)
+    tag7 = models.CharField(max_length=100, null=True, blank=True)
+    tag8 = models.CharField(max_length=100, null=True, blank=True)
+    tag9 = models.CharField(max_length=100, null=True, blank=True)
+    tag10 = models.CharField(max_length=100, null=True, blank=True)
 
 class SellXP(models.Model):
     title = models.CharField(max_length=200)
