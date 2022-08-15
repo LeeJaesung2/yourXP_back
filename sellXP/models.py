@@ -14,7 +14,6 @@ class SellXP_tag(models.Model):
     tag9 = models.CharField(max_length=100, null=True)
     tag10 = models.CharField(max_length=100, null=True)
 
-# Create your models here.
 class SellXP(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
@@ -27,15 +26,21 @@ class SellXP(models.Model):
     # 좋아요 기능 N:N 관계정의
     like = models.ManyToManyField(User, related_name="likes", blank=True)
 
+def image_upload_path(instance, filename):
+    return f'{instance.sellXP_id.id}/{filename}'
+
+class Sell_image(models.Model):
+    sellXP_id = models.ForeignKey("SellXP", related_name="image", on_delete=models.CASCADE, db_column="image_sellXP_id")
+    image = models.ImageField(upload_to = image_upload_path)
+
 #   조회수 기능 (프론트에서 함수호출 필요)
-    @property
-    def update_hit(self):
-        self.hits = self.hits + 1
-        self.save()
+@property
+def update_hit(self):
+    self.hits = self.hits + 1
+    self.save()
 
 class Sell_review(models.Model): #리뷰 모델
     sellXP_id = models.ForeignKey("SellXP", related_name="sellXP", on_delete=models.CASCADE, db_column="sellXP_id")
     body = models.TextField()
     user = models.ForeignKey("user.User", related_name="user", on_delete=models.CASCADE, db_column="user")
     grad = models.IntegerField(null=False, validators=[MaxValueValidator(10),MinValueValidator(1)])
-

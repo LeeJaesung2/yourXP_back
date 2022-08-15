@@ -40,4 +40,9 @@ class Migration(migrations.Migration):
             name='user',
             field=models.ForeignKey(db_column='user', on_delete=django.db.models.deletion.CASCADE, related_name='user', to=settings.AUTH_USER_MODEL),
         ),
+        migrations.AddField(
+            model_name='sell_image',
+            name='sellXP_id',
+            field=models.ForeignKey(db_column='image_sellXP_id', on_delete=django.db.models.deletion.CASCADE, related_name='image', to='sellXP.sellxp'),
+        ),
     ]

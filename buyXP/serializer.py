@@ -7,7 +7,6 @@ class BuyXPSerializer(serializers.ModelSerializer):
         model = BuyXP
         fields = ('title', 'text', 'create_time', 'hits', 'price', 'BuyXP_tag', 'user') 
 
-
 class BuyXP_tagSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuyXP_tag

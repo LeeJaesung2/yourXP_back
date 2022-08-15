@@ -2,6 +2,8 @@
 
 import django.core.validators
 from django.db import migrations, models
+import django.db.models.deletion
+import sellXP.models
 
 
 class Migration(migrations.Migration):
@@ -12,6 +14,13 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.CreateModel(
+            name='Sell_image',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('image', models.ImageField(upload_to=sellXP.models.image_upload_path)),
+            ],
+        ),
         migrations.CreateModel(
             name='Sell_review',
             fields=[

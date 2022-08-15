@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializer import UserSerializer
+from .serializer import UserSerializer, PointSerializer
 from .models import User
 from django.contrib.auth import authenticate, login, logout
 
@@ -20,7 +20,6 @@ def userDetail(request, user_id): #단일 회원 조회, 수정, 삭제
         serializer = UserSerializer(user)
         return Response(serializer.data)
     elif request.method == 'PATCH':
-        print(request.data)
         serializer = UserSerializer(user, data=request.data, partial = True)
         if serializer.is_valid():
             serializer.save()
@@ -53,3 +52,12 @@ def login_view(request): #로그인
 def logout_view(request): #로그아웃
     logout(request)
     return redirect('getUsers')
+
+@api_view(['PATCH'])
+def pointDetail(request, user_id):
+    user = User.objects.get(pk = user_id)
+    serializer = PointSerializer(user, data=request.data, partial = True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
