@@ -5,8 +5,9 @@ from buyXP import views
 
 urlpatterns = [
     path('buys', views.getBuyXP, name="getBuyXP"),
-    path('buys/detail/<id>', views.detailBuyXP, name="detailBuyXP"),
+    path('buys/detail/<buyXP_id>', views.detailBuyXP, name="detailBuyXP"),
     path('buy', views.createBuyXP, name="createBuyXP"),
-    path('buys/update/<id>', views.updateBuyXP, name="updateBuyXP"),
+    path('buys/update/<buyXP_id>', views.updateBuyXP, name="updateBuyXP"),
+    path('buys/delete/<int:buyXP_id>', views.deleteBuyXP, name="deleteBuyXP"),
 ]
 
