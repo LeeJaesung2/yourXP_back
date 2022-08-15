@@ -24,22 +24,12 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-class PointPlusSerializer(serializers.ModelSerializer):
+class PointSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'point')
 
     def update(self, user, validated_data):
         user.point += validated_data.get('point', user.point)
-        user.save()
-        return user
-
-class PointMinusSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('username', 'point')
-
-    def update(self, user, validated_data):
-        user.point -= validated_data.get('point', user.point)
         user.save()
         return user

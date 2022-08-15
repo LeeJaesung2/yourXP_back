@@ -11,7 +11,7 @@ router.register('create', sellXPViewSet)
 
 urlpatterns = [
     path('', views.getSellXPs, name="getSellXPs"),    
-    path("", include(router.urls)),
+    path("", include(router.urls)), #127.0.0.1/SellXP/create
     #path('create', views.createSellXP, name="createSellXP"),
     path('<sellXP_id>', views.getSellXP, name="getSellXP"),
     path('update/<sellxp_id>', views.updateSellXP, name="updateSellXP"),
@@ -20,4 +20,5 @@ urlpatterns = [
     path('<sellXP_id>/review', views.createReview, name="createReview"),
     path('<sellXP_id>/review/<sell_review_id>', views.reviewDetail, name="readUpdateDelete"),
     path('like/<int:sellxp_id', views.sellXP_like, name="sellXP_like"),
+    path('<sellName>', views.searchSellXP, name="searchSellXP"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

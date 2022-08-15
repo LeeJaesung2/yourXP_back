@@ -37,7 +37,6 @@ def createSellXP(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST'])
 class sellXPViewSet(ModelViewSet):
     queryset = SellXP.objects.all().order_by('-create_time')
     serializer_class = SellXPSerializer
@@ -102,6 +101,10 @@ def createReview(request, sellXP_id): #리뷰 작성
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class sellXPViewSet(ModelViewSet):
-    queryset = SellXP.objects.all().order_by('-create_time')
-    serializer_class = SellXPSerializer
+@api_view(['GET'])
+def searchSellXP(request, searchName):
+    name = searchName
+    sells = SellXP.objects.all()
+    searchSells = sells.filter(title__icontains=name)
+    searchSellsSerializer = SellXPSerializer(searchSells, many=True)
+    return Response(searchSellsSerializer.data)
