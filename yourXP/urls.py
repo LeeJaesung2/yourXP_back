@@ -20,7 +20,6 @@ from django.views.static import serve
 from django.conf import settings
 from django.conf.urls.static import static
 from sellXP.models import Sell_image
-
 #from . import views
 
 urlpatterns = [
