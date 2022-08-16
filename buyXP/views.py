@@ -22,10 +22,10 @@ def getBuyXP(request):
         return Response(buysSerializer.data)
     
 @api_view(['GET'])
-def searchBuyXP(request):
+def searchBuyXP(request, search_keyword):
         name = request
         buys = BuyXP.objects.all()
-        searchBuys = buys.filter(title__icontains=name)
+        searchBuys = buys.filter(title__icontains=search_keyword)
         searchBuysSerializer = BuyXPSerializer(searchBuys, many=True)
         return Response(searchBuysSerializer.data)
 
