@@ -111,27 +111,32 @@ def getSellXP_tag(request, sellXPtag_id):
     return Response(serializer.data)
 
 @api_view(['POST'])
-def createSellXP_tag(request):
-    tagSerializer = SellXP_tagSerializer(data=request.data, context={'request' : request})
+def createSellXP_tag(request, sellXPtag_id):
+    sellxp = SellXP.objects.get(pk = sellXPtag_id)
+    tagSerializer = SellXP_tagSerializer(data=request.data)
     if tagSerializer.is_valid():
-        tagSerializer.save()
+        tagSerializer.save(sellXPtag_id=sellxp)
         return Response(tagSerializer.data, status=status.HTTP_201_CREATED)
     return Response(tagSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['PATCH'])
-def updateSellXP_tag(request, sellxptag_id):
-    sellxp_tag = SellXP_tag.objects.get(pk = sellxptag_id)
-    serializer = SellXP_tagSerializer(sellxp_tag, data=request.data, partial = True)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['DELETE'])
-def deleteSellXP_tag(request, sellxptag_id):
-    sellxp_tag = SellXP_tag.objects.get(pk = sellxptag_id)
-    sellxp_tag.delete()
-    return Response({'message':'sucess', 'code' : 200})
+@api_view(['GET', 'PATCH', 'DELETE'])
+def sellXP_tag_detail(request, sellXPtag_id): 
+    sell_tag = SellXP.objects.get(pk = sellXPtag_id)
+    print(1234)
+    if request.method == 'GET':
+        print(123)
+        serializer = SellXP_tagSerializer(sell_tag)
+        return Response(serializer.data)
+    elif request.method == 'PATCH':
+        print(request.data)
+        serializer = SellXP_tagSerializer(sell_tag, data=request.data, partial = True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        sell_tag.delete()
+        return Response({'message':'sucess', 'code' : 200})
 
 #검색 기능
 @api_view(['GET'])
