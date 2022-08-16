@@ -146,3 +146,4 @@ def searchSellXP(request, sellName):
     searchSellsSerializer = SellXPSerializer(searchSells, many=True)
     return Response(searchSellsSerializer.data)
 
+
