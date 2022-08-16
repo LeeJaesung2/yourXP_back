@@ -36,4 +36,5 @@ class SellXP_tagSerializer(serializers.ModelSerializer):
     class Meta:
         model = SellXP_tag
         fields = '__all__'
-        read_only_fields=('sellXPtag_id')
+        read_only_fields= ('sellXPtag_id', )
+    
