@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from urllib import response
 from .models import BuyXP, BuyXP_tag
-from .serializer import BuyXP_tagSerializer, BuyXPSerializer
+from .serializer import BuyXP_tagSerializer, BuyXPSerializer, hitsBuyXPSerializer
 from buyXP import serializer
 from user.models import User
 from operator import itemgetter, attrgetter
@@ -49,14 +49,11 @@ def createBuyXP(request):
 @api_view(['PATCH'])
 def updateBuyXP(request, buyXP_id):
     print(request.data)
-    tags = BuyXP_tag.objects.get(pk=buyXP_id)
     buys = BuyXP.objects.get(pk=buyXP_id) 
     buysSerializer = BuyXPSerializer(buys, data=request.data, partial=True)
-    tagsSerializer = BuyXP_tagSerializer(tags, data=request.data, partial=True)
-    serializer = buysSerializer, tagsSerializer
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status = status.HTTP_201_CREATED)
+    if buysSerializer.is_valid():
+        buysSerializer.save()
+        return Response(buysSerializer.data, status = status.HTTP_201_CREATED)
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
@@ -67,3 +64,11 @@ def deleteBuyXP(request, buyXP_id):
     tags = BuyXP_tag.objects.get(pk=buyXP_id)
     tags.delete()
     return Response({'message':'success', 'code':'200'})
+
+# @api_view(['GET'])
+# def hitsBuyXP(request):
+#     buys = BuyXP.objects.all() #BuyXP의 모든 자료를 가져옴.
+#     # hits = BuyXP.hits.objects.get() 
+#     # hitsBuys = sorted(buys, key=lambda hits : hits[2], reverse=True)
+#     serializer = hitsBuyXPSerializer(hitsBuys, many=True) #정렬된 값을 serializing 함
+#     return Response(serializer.data) #serializing된 값을 return함 
