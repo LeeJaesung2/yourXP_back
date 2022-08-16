@@ -11,8 +11,8 @@ router.register(r'create', views.sellXPViewSet)
 
 urlpatterns = [
     path('', views.getSellXPs, name="getSellXPs"),    
-    path("", include(router.urls)),
-#   path('create', views.createSellXP, name="createSellXP"),
+    path("", include(router.urls)), #127.0.0.1/SellXP/create
+    #path('create', views.createSellXP, name="createSellXP"),
     path('<sellXP_id>', views.getSellXP, name="getSellXP"),
     path('update/<sellxp_id>', views.updateSellXP, name="updateSellXP"),
     path('delete/<int:sellxp_id>', views.deleteSellXP, name="deleteSellXP"),
@@ -25,4 +25,6 @@ urlpatterns = [
     path('tag_create', views.createSellXP_tag, name="createSellXP_tag"),
     path('tag_update/<sellxptag_id>', views.updateSellXP_tag, name="updateSellXP_tag"),
     path('tag_delete/<int:sellxptag_id>', views.deleteSellXP_tag, name="deleteSellXP_tag"),
+
+    path('<sellName>', views.searchSellXP, name="searchSellXP"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

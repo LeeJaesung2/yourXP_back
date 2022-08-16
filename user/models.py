@@ -8,3 +8,6 @@ class User(AbstractUser):
     nickname = models.CharField(max_length=100, unique = True)
     email = models.EmailField(max_length=100, unique = True)
     point = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.username

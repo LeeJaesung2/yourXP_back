@@ -103,7 +103,6 @@ def createReview(request, sellXP_id): #리뷰 작성
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 # tag CRUD
 @api_view(['GET'])
 def getSellXP_tag(request, sellXPtag_id):
@@ -133,3 +132,12 @@ def deleteSellXP_tag(request, sellxptag_id):
     sellxp_tag = SellXP_tag.objects.get(pk = sellxptag_id)
     sellxp_tag.delete()
     return Response({'message':'sucess', 'code' : 200})
+
+@api_view(['GET'])
+def searchSellXP(request, searchName):
+    name = searchName
+    sells = SellXP.objects.all()
+    searchSells = sells.filter(title__icontains=name)
+    searchSellsSerializer = SellXPSerializer(searchSells, many=True)
+    return Response(searchSellsSerializer.data)
+
