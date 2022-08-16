@@ -15,6 +15,9 @@ class BuyXP(models.Model):
 
     hits = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.title
+
 #   조회수 기능 (프론트에서 함수호출 필요)
     @property
     def update_hit(self):
@@ -30,3 +33,6 @@ class BuyXP_tag(models.Model):
     tag6 = models.CharField(max_length=100, blank=True, null=True)
     tag7 = models.CharField(max_length=100, blank=True, null=True)
     tag8 = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.tag1
