@@ -44,7 +44,8 @@ AUTH_USER_MODEL = 'user.User'
 
 #CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:8000','https://port-0-yourxp-back-5faq24l6koz2gl.gksl1.cloudtype.app']
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = True
+#CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
