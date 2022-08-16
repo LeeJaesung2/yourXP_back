@@ -2,7 +2,8 @@ from django.urls import path
 from .import views
 
 urlpatterns = [
-    path('buys', views.getBuyXP, name="getBuyXP"),
+    path('buys/hits', views.hitsGetBuyXP, name="getBuyXP"),
+    path('buys/views', views.viewsGetBuyXP, name="getBuyXP"),
     path('buys/<str:search_keyword>', views.searchBuyXP, name='searchBuyXP'),
     path('buys/detail/<buyXP_id>', views.detailBuyXP, name="detailBuyXP"),
     path('buy', views.createBuyXP, name="createBuyXP"),
