@@ -3,7 +3,7 @@ from .import views
 
 urlpatterns = [
     path('buys', views.getBuyXP, name="getBuyXP"),
-    path('buys/<str:buyName>', views.searchBuyXP, name='searchBuyXP'),
+    path('buys/<reruqest>', views.searchBuyXP, name='searchBuyXP'),
     path('buys/detail/<buyXP_id>', views.detailBuyXP, name="detailBuyXP"),
     path('buy', views.createBuyXP, name="createBuyXP"),
     path('buys/update/<buyXP_id>', views.updateBuyXP, name="updateBuyXP"),

@@ -22,8 +22,8 @@ def getBuyXP(request):
         return Response(buysSerializer.data)
     
 @api_view(['GET'])
-def searchBuyXP(request, searchName):
-        name = searchName
+def searchBuyXP(request):
+        name = request
         buys = BuyXP.objects.all()
         searchBuys = buys.filter(title__icontains=name)
         searchBuysSerializer = BuyXPSerializer(searchBuys, many=True)
@@ -61,8 +61,6 @@ def updateBuyXP(request, buyXP_id):
 def deleteBuyXP(request, buyXP_id):
     buys = BuyXP.objects.get(pk=buyXP_id)
     buys.delete()
-    tags = BuyXP_tag.objects.get(pk=buyXP_id)
-    tags.delete()
     return Response({'message':'success', 'code':'200'})
 
 # @api_view(['GET'])
