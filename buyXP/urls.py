@@ -9,3 +9,4 @@ urlpatterns = [
     path('buys/update/<buyXP_id>', views.updateBuyXP, name="updateBuyXP"),
     path('buys/delete/<int:buyXP_id>', views.deleteBuyXP, name="deleteBuyXP"),
 ]
+

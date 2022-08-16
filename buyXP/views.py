@@ -9,7 +9,10 @@ from .serializer import BuyXP_tagSerializer, BuyXPSerializer, hitsBuyXPSerialize
 from buyXP import serializer
 from user.models import User
 from operator import itemgetter, attrgetter
+from rest_framework import generics
 from django.shortcuts import render
+from rest_framework.filters import SearchFilter
+
 
 # Create your views here.
 
@@ -62,11 +65,3 @@ def deleteBuyXP(request, buyXP_id):
     buys = BuyXP.objects.get(pk=buyXP_id)
     buys.delete()
     return Response({'message':'success', 'code':'200'})
-
-# @api_view(['GET'])
-# def hitsBuyXP(request):
-#     buys = BuyXP.objects.all() #BuyXP의 모든 자료를 가져옴.
-#     # hits = BuyXP.hits.objects.get() 
-#     # hitsBuys = sorted(buys, key=lambda hits : hits[2], reverse=True)
-#     serializer = hitsBuyXPSerializer(hitsBuys, many=True) #정렬된 값을 serializing 함
-#     return Response(serializer.data) #serializing된 값을 return함 
