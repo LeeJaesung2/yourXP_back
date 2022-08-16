@@ -133,11 +133,11 @@ def deleteSellXP_tag(request, sellxptag_id):
     sellxp_tag.delete()
     return Response({'message':'sucess', 'code' : 200})
 
+#검색 기능
 @api_view(['GET'])
-def searchSellXP(request, searchName):
-    name = searchName
+def searchSellXP(request, sellName):
     sells = SellXP.objects.all()
-    searchSells = sells.filter(title__icontains=name)
+    searchSells = sells.filter(title__icontains=sellName)
     searchSellsSerializer = SellXPSerializer(searchSells, many=True)
     return Response(searchSellsSerializer.data)
 

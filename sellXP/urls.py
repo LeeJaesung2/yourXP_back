@@ -26,5 +26,5 @@ urlpatterns = [
     path('tag_update/<sellxptag_id>', views.updateSellXP_tag, name="updateSellXP_tag"),
     path('tag_delete/<int:sellxptag_id>', views.deleteSellXP_tag, name="deleteSellXP_tag"),
 
-    path('<sellName>', views.searchSellXP, name="searchSellXP"),
+    path('search/<str:sellName>', views.searchSellXP, name="searchSellXP"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
