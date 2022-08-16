@@ -49,6 +49,6 @@ class Sell_review(models.Model): #리뷰 모델
     sellXP_id = models.ForeignKey("SellXP", related_name="sellXP", on_delete=models.CASCADE, db_column="sellXP_id")
     body = models.TextField()
     user = models.ForeignKey("user.User", related_name="user", on_delete=models.CASCADE, db_column="user")
-    grad = models.IntegerField(null=False, validators=[MaxValueValidator(10),MinValueValidator(1)])
+    grad = models.FloatField(null=False, validators=[MaxValueValidator(10),MinValueValidator(1)])
     def __str__(self):
         return self.sellXP_id.title
