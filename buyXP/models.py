@@ -13,8 +13,9 @@ class BuyXP(models.Model):
     deadline = models.DateTimeField()
     price = models.IntegerField(blank=True, null=True)
     BuyXP_tag = models.ForeignKey("BuyXP_tag", related_name="+", on_delete=models.CASCADE, default="", null=True, blank=True)
-
     hits = models.IntegerField(default=0)
+    def __str__(self):
+        return self.title
 
 #   조회수 기능 (프론트에서 함수호출 필요)
     @property
@@ -31,3 +32,6 @@ class BuyXP_tag(models.Model):
     tag6 = models.CharField(max_length=100, blank=True, null=True)
     tag7 = models.CharField(max_length=100, blank=True, null=True)
     tag8 = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.tag1

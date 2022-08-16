@@ -5,14 +5,14 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from urllib import response
 from .models import BuyXP, BuyXP_tag
-from .serializer import BuyXP_tagSerializer, BuyXPSerializer
+from .serializer import BuyXP_tagSerializer, BuyXPSerializer, hitsBuyXPSerializer
 from buyXP import serializer
 from user.models import User
 from operator import itemgetter, attrgetter
 from rest_framework import generics
 from django.shortcuts import render
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.filters import SearchFilter
+
 
 # Create your views here.
 
@@ -25,10 +25,10 @@ def getBuyXP(request):
         return Response(buysSerializer.data)
     
 @api_view(['GET'])
-def searchBuyXP(request, searchName):
-        name = searchName
+def searchBuyXP(request, search_keyword):
+        name = request
         buys = BuyXP.objects.all()
-        searchBuys = buys.filter(title__icontains=name)
+        searchBuys = buys.filter(title__icontains=search_keyword)
         searchBuysSerializer = BuyXPSerializer(searchBuys, many=True)
         return Response(searchBuysSerializer.data)
 
@@ -52,14 +52,11 @@ def createBuyXP(request):
 @api_view(['PATCH'])
 def updateBuyXP(request, buyXP_id):
     print(request.data)
-    tags = BuyXP_tag.objects.get(pk=buyXP_id)
     buys = BuyXP.objects.get(pk=buyXP_id) 
     buysSerializer = BuyXPSerializer(buys, data=request.data, partial=True)
-    tagsSerializer = BuyXP_tagSerializer(tags, data=request.data, partial=True)
-    serializer = buysSerializer, tagsSerializer
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status = status.HTTP_201_CREATED)
+    if buysSerializer.is_valid():
+        buysSerializer.save()
+        return Response(buysSerializer.data, status = status.HTTP_201_CREATED)
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
@@ -67,61 +64,4 @@ def updateBuyXP(request, buyXP_id):
 def deleteBuyXP(request, buyXP_id):
     buys = BuyXP.objects.get(pk=buyXP_id)
     buys.delete()
-    tags = BuyXP_tag.objects.get(pk=buyXP_id)
-    tags.delete()
     return Response({'message':'success', 'code':'200'})
-
-### 필요없는 부분 ###
-
-#drf 검색 폼 코드 (template 필요해서 주석 처리함)
-# class searchBuyXPList(generics.ListAPIView):
-#     queryset = BuyXP.objects.all()
-#     serializer_class = BuyXPSerializer
-#     filter_backends = [DjangoFilterBackend]
-#     filterset_fields = ['title', 'text']
-
-
-
-
-# # Create your views here.
-# class SearchListCreateView(ListCreateAPIView):
-#     name = "board-list-create"
-#     serializer_class = BuyXP
-    
-#     def searchBuyXP(self):
-#         buys = BuyXP.objects.all()
-#         return buys
-
-#     def list(self, request, *args, **kwargs):
-#         buysSearchlist = self.set_filters( self.searchBuyXP(), request )
-
-#         serializer = self.get_serializer(buysSearchlist, many=True)
-        
-#         return Response(serializer.data)
-
-#     def set_filters(self, queryset, request):        
-#         type = request.query_params.get('type', None)
-#         description = request.query_params.get('description', None)
-
-#         if type is not None:
-#             queryset = queryset.filter(type=type)
-        
-#         if description is not None:
-#             queryset = queryset.filter(description__contains=description)
-
-#         return queryset
-
-
-# class BuyXPRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-#     name = "buyXP-retrieve-update-destroy"
-#     serializer_class = BuyXPSerializer
-#     buys = BuyXP.objects.all()
-
-
-# @api_view(['GET'])
-# def pointsBuyXP(request):
-#     buys = BuyXP.objects.all()
-#     hit = BuyXP.hits
-#     sorted(buys, key=attrgetter(hit), reverse=True)
-#     buysSerializer = BuyXPSerializer(buys, many=True)
-#     return Response(buysSerializer.data)
