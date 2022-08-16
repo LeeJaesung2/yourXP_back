@@ -1,3 +1,4 @@
+from re import T
 from sqlite3 import DateFromTicks
 from django.db import models
 from user.models import User
@@ -11,10 +12,8 @@ class BuyXP(models.Model):
     user = models.ForeignKey(User, related_name='+', on_delete=models.CASCADE, default="", null=True, blank=True)
     deadline = models.DateTimeField()
     price = models.IntegerField(blank=True, null=True)
-    #BuyXP_tag = models.ForeignKey("BuyXP_tag", related_name="+", on_delete=models.CASCADE, default="", null=True, blank=True)
-
+    BuyXP_tag = models.ForeignKey("BuyXP_tag", related_name="+", on_delete=models.CASCADE, default="", null=True, blank=True)
     hits = models.IntegerField(default=0)
-
     def __str__(self):
         return self.title
 
