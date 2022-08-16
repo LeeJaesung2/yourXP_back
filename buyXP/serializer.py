@@ -10,7 +10,8 @@ class BuyXPSerializer(serializers.ModelSerializer):
 class BuyXP_tagSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuyXP_tag
-        fields = ('tag1', 'tag2','tag3','tag4','tag5','tag6','tag7','tag8') 
+        fields = '__all__' 
+        read_only_fields= ('buyXPtag_id', )
 
 class hitsBuyXPSerializer(serializers.ModelSerializer):
     class Meta:

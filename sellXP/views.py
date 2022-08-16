@@ -126,9 +126,7 @@ def createSellXP_tag(request, sellXPtag_id):
 @api_view(['GET', 'PATCH', 'DELETE'])
 def sellXP_tag_detail(request, sellXPtag_id): 
     sell_tag = SellXP.objects.get(pk = sellXPtag_id)
-    print(1234)
     if request.method == 'GET':
-        print(123)
         serializer = SellXP_tagSerializer(sell_tag)
         return Response(serializer.data)
     elif request.method == 'PATCH':

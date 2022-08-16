@@ -20,7 +20,6 @@ from django.views.static import serve
 from django.conf import settings
 from django.conf.urls.static import static
 from sellXP.models import Sell_image
-
 #from . import views
 
 urlpatterns = [
@@ -30,4 +29,3 @@ urlpatterns = [
     path('user/', include('user.urls')),
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT,}),
 ]+ static(settings.MEDIA_URL+"/<Sell_image.sellXP_id.id>", document_root=settings.MEDIA_ROOT)
-
