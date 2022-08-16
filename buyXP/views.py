@@ -70,3 +70,36 @@ def deleteBuyXP(request, buyXP_id):
 #     # hitsBuys = sorted(buys, key=lambda hits : hits[2], reverse=True)
 #     serializer = hitsBuyXPSerializer(hitsBuys, many=True) #정렬된 값을 serializing 함
 #     return Response(serializer.data) #serializing된 값을 return함 
+
+# tag CRUD
+@api_view(['GET'])
+def getBuyXP_tag(request, buyXPtag_id):
+    tag = BuyXP_tag.objects.filter(buyXPtag_id = buyXPtag_id)
+    serializer = BuyXP_tagSerializer(tag, many = True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def createBuyXP_tag(request, buyXPtag_id):
+    buyxp = BuyXP.objects.get(pk = buyXPtag_id)
+    tagSerializer = BuyXP_tagSerializer(data=request.data)
+    if tagSerializer.is_valid():
+        tagSerializer.save(buyXPtag_id=buyxp)
+        return Response(tagSerializer.data, status=status.HTTP_201_CREATED)
+    return Response(tagSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PATCH', 'DELETE'])
+def buyXP_tag_detail(request, buyXPtag_id): 
+    buy_tag = BuyXP.objects.get(pk = buyXPtag_id)
+    if request.method == 'GET':
+        serializer = BuyXP_tagSerializer(buy_tag)
+        return Response(serializer.data)
+    elif request.method == 'PATCH':
+        print(request.data)
+        serializer = BuyXP_tagSerializer(buy_tag, data=request.data, partial = True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        buy_tag.delete()
+        return Response({'message':'sucess', 'code' : 200})
