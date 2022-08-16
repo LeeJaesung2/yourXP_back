@@ -4,9 +4,9 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializer import SellXPSerializer
+from .serializer import SellXPSerializer, SellXP_tagSerializer
 from .serializer import Sell_reviewSerializer
-from .models import SellXP
+from .models import SellXP, SellXP_tag
 from .models import Sell_review
 from sellXP import serializer
 from rest_framework.viewsets import ModelViewSet
@@ -31,7 +31,9 @@ def getSellXP(request, sellXP_id):
 
 @api_view(['POST'])
 def createSellXP(request):
-    serializer = SellXPSerializer(data=request.data, context={'request': request})
+    Sellserializer = SellXPSerializer(data=request.data, context={'request': request})
+    tagSerializer = SellXP_tagSerializer(data=request.data)
+    serializer = Sellserializer, tagSerializer
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -101,6 +103,36 @@ def createReview(request, sellXP_id): #리뷰 작성
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# tag CRUD
+@api_view(['GET'])
+def getSellXP_tag(request, sellXPtag_id):
+    tag = SellXP_tag.objects.filter(sellXPtag_id = sellXPtag_id)
+    serializer = SellXP_tagSerializer(tag, many = True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def createSellXP_tag(request):
+    tagSerializer = SellXP_tagSerializer(data=request.data, context={'request' : request})
+    if tagSerializer.is_valid():
+        tagSerializer.save()
+        return Response(tagSerializer.data, status=status.HTTP_201_CREATED)
+    return Response(tagSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PATCH'])
+def updateSellXP_tag(request, sellxptag_id):
+    sellxp_tag = SellXP_tag.objects.get(pk = sellxptag_id)
+    serializer = SellXP_tagSerializer(sellxp_tag, data=request.data, partial = True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def deleteSellXP_tag(request, sellxptag_id):
+    sellxp_tag = SellXP_tag.objects.get(pk = sellxptag_id)
+    sellxp_tag.delete()
+    return Response({'message':'sucess', 'code' : 200})
+
 @api_view(['GET'])
 def searchSellXP(request, searchName):
     name = searchName
@@ -108,3 +140,4 @@ def searchSellXP(request, searchName):
     searchSells = sells.filter(title__icontains=name)
     searchSellsSerializer = SellXPSerializer(searchSells, many=True)
     return Response(searchSellsSerializer.data)
+

@@ -6,7 +6,7 @@ from django.conf import settings
 from sellXP.views import sellXPViewSet
 
 router = DefaultRouter()
-router.register('create', sellXPViewSet)
+router.register(r'create', views.sellXPViewSet)
 
 
 urlpatterns = [
@@ -20,5 +20,11 @@ urlpatterns = [
     path('<sellXP_id>/review', views.createReview, name="createReview"),
     path('<sellXP_id>/review/<sell_review_id>', views.reviewDetail, name="readUpdateDelete"),
     path('like/<int:sellxp_id', views.sellXP_like, name="sellXP_like"),
+
+    path('tag/<sellXPtag_id>', views.getSellXP_tag, name="getSellXP_tag"),
+    path('tag_create', views.createSellXP_tag, name="createSellXP_tag"),
+    path('tag_update/<sellxptag_id>', views.updateSellXP_tag, name="updateSellXP_tag"),
+    path('tag_delete/<int:sellxptag_id>', views.deleteSellXP_tag, name="deleteSellXP_tag"),
+
     path('<sellName>', views.searchSellXP, name="searchSellXP"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

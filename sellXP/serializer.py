@@ -35,4 +35,5 @@ class Sell_reviewSerializer(serializers.ModelSerializer):
 class SellXP_tagSerializer(serializers.ModelSerializer):
     class Meta:
         model = SellXP_tag
-        fields = ('tag1', 'tag2','tag3','tag4','tag5','tag6','tag7','tag8','tag9','tag10')
+        fields = '__all__'
+        read_only_fields=('sellXPtag_id')
