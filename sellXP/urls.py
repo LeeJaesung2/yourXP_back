@@ -10,7 +10,8 @@ router.register(r'create', views.sellXPViewSet)
 
 
 urlpatterns = [
-    path('', views.getSellXPs, name="getSellXPs"),    
+    path('views', views.viewsGetSellXPs, name="viewsGetSellXPs"),    
+    # path('recommends', views.recommendsGetSellXPs, name="recommendGetSellXPs"),    
     path("", include(router.urls)), #127.0.0.1/SellXP/create
     #path('create', views.createSellXP, name="createSellXP"),
     path('<sellXP_id>', views.getSellXP, name="getSellXP"),

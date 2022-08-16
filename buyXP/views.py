@@ -18,8 +18,15 @@ from rest_framework.filters import SearchFilter
 
 #불러오기 BuyXP와 BuyXP_tag 동시에 불러오는 것으로 수정하는 중 BuyXP_tag도 같이 로딩되도록 모두 수정함
 @api_view(['GET'])
-def getBuyXP(request):
-    buys = BuyXP.objects.all()
+def hitsGetBuyXP(request):
+    buys = BuyXP.objects.all().order_by('-hits')
+    if request.method == 'GET':
+        buysSerializer = BuyXPSerializer(buys, many=True)
+        return Response(buysSerializer.data)
+
+@api_view(['GET'])
+def viewsGetBuyXP(request):
+    buys = BuyXP.objects.all().order_by('-id')
     if request.method == 'GET':
         buysSerializer = BuyXPSerializer(buys, many=True)
         return Response(buysSerializer.data)

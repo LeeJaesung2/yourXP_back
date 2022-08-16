@@ -18,10 +18,17 @@ from datetime import date, datetime, timedelta
 
 # SellXP CRUD 
 @api_view(['GET'])
-def getSellXPs(request):
-    sellxp = SellXP.objects.all()
+def viewsGetSellXPs(request):
+    sellxp = SellXP.objects.all().order_by('-id')
     serializer = SellXPSerializer(sellxp, many = True)
     return Response(serializer.data)
+
+# @api_view(['GET'])
+# def recommendsGetSellXPs(request):
+#     likecount = len(SellXP.objects.like)
+#     sellxp = SellXP.objects.all().order_by('-likecount')
+#     serializer = SellXPSerializer(sellxp, many = True)
+#     return Response(serializer.data)
 
 @api_view(['GET'])
 def getSellXP(request, sellXP_id):
