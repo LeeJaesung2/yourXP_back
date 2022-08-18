@@ -28,7 +28,7 @@ class SellXP(models.Model):
     price = models.IntegerField()
     #sellXP_tag = models.ForeignKey(SellXP_tag, related_name='+', on_delete=models.CASCADE, default="", blank=True, null=True)
     # 좋아요 기능 N:N 관계정의
-    like = models.ManyToManyField(User, related_name="likes", blank=True)
+    #like = models.ManyToManyField(User, related_name="likes", blank=True, null=True)
     def __str__(self):
         return self.title
 
@@ -41,7 +41,7 @@ class Sell_image(models.Model):
     def __str__(self):
         return self.sellXP_id.title
 
-#   조회수 기능 (프론트에서 함수호출 필요)
+# 조회수 기능 (프론트에서 함수호출 필요)
 @property
 def update_hit(self):
     self.hits = self.hits + 1
