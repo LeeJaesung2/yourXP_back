@@ -28,7 +28,7 @@ class SellXP(models.Model):
     price = models.IntegerField()
     #sellXP_tag = models.ForeignKey(SellXP_tag, related_name='+', on_delete=models.CASCADE, default="", blank=True, null=True)
     # 좋아요 기능 N:N 관계정의
-    #like = models.ManyToManyField(User, related_name="likes", blank=True, null=True)
+    like = models.ManyToManyField(User, related_name="likes", blank=True, null=True)
     def __str__(self):
         return self.title
 
