@@ -10,7 +10,8 @@ class SellXPSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = SellXP
-        fields = '__all__'
+        fields = ('title','text','create_time','user','hits','recommend','price', 'images')
+
 
     def create(self, validated_data):
         instance  = SellXP.objects.create(**validated_data)
@@ -37,7 +38,3 @@ class SellXP_tagSerializer(serializers.ModelSerializer):
         model = SellXP_tag
         fields = '__all__'
         read_only_fields= ('sellXPtag_id', )
-
-
-
-    

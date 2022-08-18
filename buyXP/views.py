@@ -43,8 +43,11 @@ def searchBuyXP(request, search_keyword):
 @api_view(['GET'])
 def detailBuyXP(request, buyXP_id):
     buys = BuyXP.objects.get(pk=buyXP_id)
+    buy_tag = BuyXP_tag.objects.get(pk=buyXP_id)
     buysSerializer = BuyXPSerializer(buys)
-    return Response(buysSerializer.data)
+    buys_tagSerializer = BuyXP_tagSerializer(buy_tag)
+    data = {'xp':buysSerializer.data, 'tag':buys_tagSerializer.data}
+    return Response(data=data)
 
 #크리에이트
 @api_view(['POST'])

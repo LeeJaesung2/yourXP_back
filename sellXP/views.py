@@ -34,8 +34,11 @@ def viewsGetSellXPs(request):
 @api_view(['GET'])
 def getSellXP(request, sellXP_id):
     sellxp = SellXP.objects.get(pk = sellXP_id)
-    serializer = SellXPSerializer(sellxp, context={"request": request})
-    return Response(serializer.data)
+    sellxp_tag = SellXP_tag.objects.get(pk = sellXP_id)
+    serializerxp = SellXPSerializer(sellxp, context={"request": request})
+    serializertag = SellXP_tagSerializer(sellxp_tag, context={"request": request})
+    data = {'xp':serializerxp.data, 'tag':serializertag.data}
+    return Response(data=data)
 
 '''
 @api_view(['POST'])
