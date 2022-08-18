@@ -11,8 +11,17 @@ class BuyXP(models.Model):
     user = models.ForeignKey(User, related_name='+', on_delete=models.CASCADE, default="", null=True, blank=True)
     deadline = models.DateTimeField()
     price = models.IntegerField(blank=True, null=True)
-    BuyXP_tag = models.ForeignKey("BuyXP_tag", related_name="+", on_delete=models.CASCADE, default="", null=True, blank=True)
     hits = models.IntegerField(default=0)
+    tag1 = models.CharField(max_length=100, blank=True, null=True)
+    tag2 = models.CharField(max_length=100, blank=True, null=True)
+    tag3 = models.CharField(max_length=100, blank=True, null=True)
+    tag4 = models.CharField(max_length=100, blank=True, null=True)
+    tag5 = models.CharField(max_length=100, blank=True, null=True)
+    tag6 = models.CharField(max_length=100, blank=True, null=True)
+    tag7 = models.CharField(max_length=100, blank=True, null=True)
+    tag8 = models.CharField(max_length=100, blank=True, null=True)
+    tag9 = models.CharField(max_length=100, blank=True, null=True)
+    tag10 = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -22,17 +31,3 @@ class BuyXP(models.Model):
     def update_hit(self):
         self.hits = self.hits + 1
         self.save()
-
-class BuyXP_tag(models.Model):
-    #buyXPtag_id = models.ForeignKey("BuyXP", related_name="buyXP_tag", on_delete=models.CASCADE, db_column="buyXPtag_id")
-    tag1 = models.CharField(max_length=100, blank=True, null=True)
-    tag2 = models.CharField(max_length=100, blank=True, null=True)
-    tag3 = models.CharField(max_length=100, blank=True, null=True)
-    tag4 = models.CharField(max_length=100, blank=True, null=True)
-    tag5 = models.CharField(max_length=100, blank=True, null=True)
-    tag6 = models.CharField(max_length=100, blank=True, null=True)
-    tag7 = models.CharField(max_length=100, blank=True, null=True)
-    tag8 = models.CharField(max_length=100, blank=True, null=True)
-
-    def __str__(self):
-        return self.tag1

@@ -2,8 +2,16 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from user.models import User
 
-class SellXP_tag(models.Model):
-    #sellXPtag_id = models.ForeignKey("SellXP", related_name="sellXP_tag", on_delete=models.CASCADE, db_column="sellXPtag_id")
+
+class SellXP(models.Model):
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    create_time = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, related_name='+', on_delete=models.CASCADE, default="", blank=True, null=True)
+    hits = models.PositiveIntegerField(default=0)
+    recommend = models.PositiveIntegerField(default=0)
+    price = models.IntegerField()
+    # 좋아요 기능 N:N 관계정의
     tag1 = models.CharField(max_length=100, null=True, blank=True)
     tag2 = models.CharField(max_length=100, null=True, blank=True)
     tag3 = models.CharField(max_length=100, null=True, blank=True)
@@ -14,20 +22,6 @@ class SellXP_tag(models.Model):
     tag8 = models.CharField(max_length=100, null=True, blank=True)
     tag9 = models.CharField(max_length=100, null=True, blank=True)
     tag10 = models.CharField(max_length=100, null=True, blank=True)
-    def __str__(self):
-        return self.tag1
-
-
-class SellXP(models.Model):
-    title = models.CharField(max_length=200)
-    text = models.TextField()
-    create_time = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, related_name='+', on_delete=models.CASCADE, default="", blank=True, null=True)
-    hits = models.PositiveIntegerField(default=0)
-    recommend = models.PositiveIntegerField(default=0)
-    price = models.IntegerField()
-    tag_content = models.ForeignKey(SellXP_tag, on_delete=models.CASCADE, related_name='+', default="", blank=True, null=True)
-    # 좋아요 기능 N:N 관계정의
     like = models.ManyToManyField(User, related_name="likes", blank=True, null=True)
     def __str__(self):
         return self.title
