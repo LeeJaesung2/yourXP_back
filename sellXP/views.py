@@ -21,7 +21,8 @@ from datetime import date, datetime, timedelta
 def viewsGetSellXPs(request):
     sellxp = SellXP.objects.all().order_by('-id')
     serializer = SellXPSerializer(sellxp, many = True)
-    return Response(serializer.data)
+    tagserializer = SellXP_tagSerializer(many = True)
+    return Response(serializer.data + tagserializer.data)
 
 # @api_view(['GET'])
 # def recommendsGetSellXPs(request):
@@ -40,7 +41,7 @@ def getSellXP(request, sellXP_id):
 def createSellXP(request):
     Sellserializer = SellXPSerializer(data=request.data, context={'request': request})
     tagSerializer = SellXP_tagSerializer(data=request.data)
-    serializer = Sellserializer, tagSerializer
+    serializer = Sellserializer + tagSerializer
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -54,7 +55,8 @@ class sellXPViewSet(ModelViewSet):
 def updateSellXP(request, sellxp_id):
     sellxp = SellXP.objects.get(pk = sellxp_id)
     serializer = SellXPSerializer(sellxp, data=request.data, partial = True)
-
+    tagSerializer = SellXP_tagSerializer(data=request.data)
+    serializer = serializer + tagSerializer
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -111,37 +113,37 @@ def createReview(request, sellXP_id): #리뷰 작성
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # tag CRUD
-@api_view(['GET'])
-def getSellXP_tag(request, sellXPtag_id):
-    tag = SellXP_tag.objects.filter(sellXPtag_id = sellXPtag_id)
-    serializer = SellXP_tagSerializer(tag, many = True)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# def getSellXP_tag(request, sellXPtag_id):
+#     tag = SellXP_tag.objects.filter(sellXPtag_id = sellXPtag_id)
+#     serializer = SellXP_tagSerializer(tag, many = True)
+#     return Response(serializer.data)
 
-@api_view(['POST'])
-def createSellXP_tag(request, sellXPtag_id):
-    sellxp = SellXP.objects.get(pk = sellXPtag_id)
-    tagSerializer = SellXP_tagSerializer(data=request.data)
-    if tagSerializer.is_valid():
-        tagSerializer.save(sellXPtag_id=sellxp)
-        return Response(tagSerializer.data, status=status.HTTP_201_CREATED)
-    return Response(tagSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# @api_view(['POST'])
+# def createSellXP_tag(request, sellXPtag_id):
+#     sellxp = SellXP.objects.get(pk = sellXPtag_id)
+#     tagSerializer = SellXP_tagSerializer(data=request.data)
+#     if tagSerializer.is_valid():
+#         tagSerializer.save(sellXPtag_id=sellxp)
+#         return Response(tagSerializer.data, status=status.HTTP_201_CREATED)
+#     return Response(tagSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET', 'PATCH', 'DELETE'])
-def sellXP_tag_detail(request, sellXPtag_id): 
-    sell_tag = SellXP.objects.get(pk = sellXPtag_id)
-    if request.method == 'GET':
-        serializer = SellXP_tagSerializer(sell_tag)
-        return Response(serializer.data)
-    elif request.method == 'PATCH':
-        print(request.data)
-        serializer = SellXP_tagSerializer(sell_tag, data=request.data, partial = True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'DELETE':
-        sell_tag.delete()
-        return Response({'message':'sucess', 'code' : 200})
+# @api_view(['GET', 'PATCH', 'DELETE'])
+# def sellXP_tag_detail(request, sellXPtag_id): 
+#     sell_tag = SellXP.objects.get(pk = sellXPtag_id)
+#     if request.method == 'GET':
+#         serializer = SellXP_tagSerializer(sell_tag)
+#         return Response(serializer.data)
+#     elif request.method == 'PATCH':
+#         print(request.data)
+#         serializer = SellXP_tagSerializer(sell_tag, data=request.data, partial = True)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_200_OK)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     elif request.method == 'DELETE':
+#         sell_tag.delete()
+#         return Response({'message':'sucess', 'code' : 200})
 
 #검색 기능
 @api_view(['GET'])
