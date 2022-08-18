@@ -36,4 +36,3 @@ class BuyXP_tag(models.Model):
 
     def __str__(self):
         return self.tag1
-
