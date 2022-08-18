@@ -21,6 +21,12 @@ def viewsGetSellXPs(request):
     serializer = SellXPSerializer(sellxp, many = True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def viewsGetSellXPsRank(request):
+    sellxp = SellXP.objects.all().order_by('-hits')[:3]
+    serializer = SellXPSerializer(sellxp, many = True)
+    return Response(serializer.data)
+
 # @api_view(['GET'])
 # def recommendsGetSellXPs(request):
 #     likecount = len(SellXP.objects.like)
