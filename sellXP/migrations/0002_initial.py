@@ -22,11 +22,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='sellxp',
-            name='tag_content',
-            field=models.ForeignKey(blank=True, default='', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='sellXP.sellxp_tag'),
-        ),
-        migrations.AddField(
-            model_name='sellxp',
             name='user',
             field=models.ForeignKey(blank=True, default='', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to=settings.AUTH_USER_MODEL),
         ),

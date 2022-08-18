@@ -38,12 +38,6 @@ class Migration(migrations.Migration):
                 ('hits', models.PositiveIntegerField(default=0)),
                 ('recommend', models.PositiveIntegerField(default=0)),
                 ('price', models.IntegerField()),
-            ],
-        ),
-        migrations.CreateModel(
-            name='SellXP_tag',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('tag1', models.CharField(blank=True, max_length=100, null=True)),
                 ('tag2', models.CharField(blank=True, max_length=100, null=True)),
                 ('tag3', models.CharField(blank=True, max_length=100, null=True)),

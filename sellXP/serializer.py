@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import SellXP, SellXP_tag, Sell_review, Sell_image
+from .models import SellXP, Sell_review, Sell_image
 
 class SellXPSerializer(serializers.ModelSerializer):
     images = serializers.SerializerMethodField()
@@ -10,7 +10,7 @@ class SellXPSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = SellXP
-        fields = ('title','text','create_time','user','hits','recommend','price', 'images')
+        fields = ('title','text','create_time','user','hits','recommend','price', 'images','tag1','tag2','tag3','tag4','tag5','tag6','tag7','tag8','tag9','tag10')
 
 
     def create(self, validated_data):
@@ -32,9 +32,3 @@ class Sell_reviewSerializer(serializers.ModelSerializer):
         model = Sell_review
         fields = '__all__'
         read_only_fields= ('sellXP_id', )
-
-class SellXP_tagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SellXP_tag
-        fields = '__all__'
-        read_only_fields= ('sellXPtag_id', )
