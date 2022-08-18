@@ -24,7 +24,7 @@ class BuyXP(models.Model):
         self.save()
 
 class BuyXP_tag(models.Model):
-    buyXPtag_id = models.ForeignKey("BuyXP", related_name="buyXP_tag", on_delete=models.CASCADE, db_column="buyXPtag_id")
+    #buyXPtag_id = models.ForeignKey("BuyXP", related_name="buyXP_tag", on_delete=models.CASCADE, db_column="buyXPtag_id")
     tag1 = models.CharField(max_length=100, blank=True, null=True)
     tag2 = models.CharField(max_length=100, blank=True, null=True)
     tag3 = models.CharField(max_length=100, blank=True, null=True)
