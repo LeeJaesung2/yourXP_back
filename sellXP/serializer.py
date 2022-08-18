@@ -10,7 +10,7 @@ class SellXPSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = SellXP
-        fields = ('title','text','create_time','user','hits','recommend','price')
+        fields = '__all__'
 
     def create(self, validated_data):
         instance  = SellXP.objects.create(**validated_data)
