@@ -34,6 +34,7 @@ def getSellXP(request, sellXP_id):
     serializer = SellXPSerializer(sellxp, context={"request": request})
     return Response(serializer.data)
 
+
 class sellXPViewSet(ModelViewSet):
     queryset = SellXP.objects.all().order_by('-create_time')
     serializer_class = SellXPSerializer
@@ -105,5 +106,6 @@ def searchSellXP(request, sellName):
     searchSells = sells.filter(title__icontains=sellName)
     searchSellsSerializer = SellXPSerializer(searchSells, many=True)
     return Response(searchSellsSerializer.data)
+
 
 

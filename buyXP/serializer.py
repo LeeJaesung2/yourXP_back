@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import BuyXP
 
+
 class BuyXPSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuyXP
