@@ -12,6 +12,7 @@ class SellXPSerializer(serializers.ModelSerializer):
         model = SellXP
         fields = ('title','text','create_time','user','hits','recommend','price', 'images')
 
+
     def create(self, validated_data):
         instance  = SellXP.objects.create(**validated_data)
         image_set = self.context['request'].FILES
