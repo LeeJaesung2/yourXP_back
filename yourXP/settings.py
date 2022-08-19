@@ -36,7 +36,7 @@ def get_secret(setting, secrets=secrets):
         raise ImproperlyConfigured(error_msg)
 
 SECRET_KEY = get_secret("SECRET_KEY")
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','port-0-yourxp-back-5faq24l6koz2gl.gksl1.cloudtype.app']
 
