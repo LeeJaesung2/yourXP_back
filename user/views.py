@@ -14,8 +14,8 @@ def getUsers(request): #전체 유저 조회
     return Response(serializer.data)
 
 @api_view(['GET', 'PATCH', 'DELETE'])
-def userDetail(request, username): #단일 회원 조회, 수정, 삭제
-    user = User.objects.get(username = username)
+def userDetail(request, user_id): #단일 회원 조회, 수정, 삭제
+    user = User.objects.get(pk = user_id)
     if request.method == 'GET':
         serializer = UserSerializer(user)
         return Response(serializer.data)
@@ -54,8 +54,8 @@ def logout_view(request): #로그아웃
     return redirect('getUsers')
 
 @api_view(['PATCH'])
-def pointDetail(request, username):
-    user = User.objects.get(username = username)
+def pointDetail(request, user_id):
+    user = User.objects.get(pk = user_id)
     serializer = PointSerializer(user, data=request.data, partial = True)
     if serializer.is_valid():
         serializer.save()
